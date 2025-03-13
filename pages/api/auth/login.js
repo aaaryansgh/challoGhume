@@ -15,6 +15,7 @@ export default async function handler(req,res){
         if(!user || !(await compare(password,user.password))){
             return res.status(401).json({message:"Invalid credentials"});
         }
+        if (!user.verified) return res.status(403).json({ message: "Please verify your email before logging in." });
         const token=jwt.sign({userId:user._id,email:user.email},process.env.JWT_SECRET,{
             expiresIn:"7d"
         });
