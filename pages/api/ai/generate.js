@@ -1,4 +1,6 @@
 import OpenAI from "openai";
+import { connectToDB } from "../../../lib/mongodb";
+import {Iter} from "../../../models/iter";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -7,13 +9,9 @@ export default async function handler(req, res) {
 
   try {
     const { destination, days, interests } = req.body;
-
-    if (!destination || !days || !interests) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
     console.log("Calling an api key", process.env.OPENAI_API_KEY);
     
-    const openai = new OpenAI({ apiKey: "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", });
+    const openai = new OpenAI({ apiKey: "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", });
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
@@ -26,11 +24,14 @@ export default async function handler(req, res) {
       ],
     });
     console.log("Response", response);
-    
-    res.status(200).json({ itinerary: response.choices[0].message.content });
+    const itineraryText = response.choices[0].message.content;
+    await connectToDB();
+    const itinerary= new Iter({destination, days, interests, itinerary: itineraryText});
+    await itinerary.save();
+    res.status(200).json({ itinerary: itineraryText });
+
   } catch (error) {
     console.log("Error", error);
-    
     res.status(500).json({ error: "Something went wrong" });
   }
 }
