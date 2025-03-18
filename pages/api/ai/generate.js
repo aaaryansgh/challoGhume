@@ -11,15 +11,15 @@ export default async function handler(req, res) {
     const { destination, days, interests } = req.body;
     console.log("Calling an api key", process.env.OPENAI_API_KEY);
     
-    const openai = new OpenAI({ apiKey: "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", });
-
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, });
+    const prompt = `Act as an perfect planner. Plan a ${days}-day trip to ${destination} for someone interested in ${interests}. Also give them their budget and the best time to visit.`;
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: "You are a helpful AI travel planner." },
         {
           role: "user",
-          content: `Plan a ${days}-day trip to ${destination} for someone interested in ${interests}.`,
+          content: prompt,
         },
       ],
     });

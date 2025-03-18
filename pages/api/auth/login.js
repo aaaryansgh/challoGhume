@@ -27,7 +27,14 @@ export default async function handler(req,res){
         maxAge:7*24*60*60,
         path:"/"
         }));
-        return res.status(200).json({message:"Logged in"});
+        res.status(200).json({
+            message: "Login successful",
+            user: {
+                _id: user._id,
+                email: user.email,
+                name: user.name,
+            },
+        });
     } catch(error){
         console.log(error);
         return res.status(500).json({message:"Internal server error"});

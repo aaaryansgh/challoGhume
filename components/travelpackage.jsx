@@ -24,7 +24,7 @@ export default function Travelpackage(){
             <h2 className="text-3xl font-bold text-center mb-6">Travel Packages</h2>
             <div className="flex flex-wrap justify-center gap-6">
                 {packages.map((pack,index)=>(
-                    <div key={index} className="w-80 p-1 bg-black font-mono shadow-md rounded-lg  overflow-hidden text-white">
+                    <div key={index} className="w-80 p-1 font-mono shadow-md rounded-lg  overflow-hidden text-black">
                         <img src={pack.image} alt={pack.name} className="rounded-lg w-full h-60 object-cover" />
                         <h3 className="mt-2 font-semibold">{pack.name}</h3>
                         <p className="text-lg font-bold">{pack.price}</p>

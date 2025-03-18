@@ -25,32 +25,33 @@ export default function ItineraryPlanner() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold">AI Travel Itinerary Generator</h1>
+    <div className="min-h-screen flex flex-col items-center bg-black py-30">
+      <h1 className="text-2xl font-bold text-white font-mono mb-6">AI Travel Itinerary Generator</h1>
+      <form  className="bg-white-300 p-6 shadow-lg rounded-lg w-full max-w-md text-white border">
       <input
         type="text"
         placeholder="Enter Destination"
-        className="border p-2 mt-4"
+        className="w-full mb-2 p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-black-500"
         value={destination}
         onChange={(e) => setDestination(e.target.value)}
       />
       <input
         type="number"
         placeholder="Number of Days"
-        className="border p-2 mt-2"
+       className="w-full p-3 mb-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black-500"
         value={days}
         onChange={(e) => setDays(e.target.value)}
       />
       <input
         type="String"
         placeholder="Interests"
-        className="border p-2 mt-2"
+        className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-black-500"
         value={interests}
         onChange={(e) => setInterest(e.target.value)}
       />
       <button 
         onClick={generateItinerary} 
-        className="mt-4 bg-blue-500 text-white p-2 rounded"
+        className="mt-4 bg-black border text-white p-2 rounded"
         disabled={loading}
       >
         {loading ? "Generating..." : "Generate Itinerary"}
@@ -62,6 +63,8 @@ export default function ItineraryPlanner() {
           <p>{itinerary}</p>
         </div>
       )}
+      </form>
+      
     </div>
   );
 }
