@@ -6,7 +6,8 @@ export default function savedItinerary() {
     
     const [loading, setLoading] = useState(true);
     useEffect(()=>{
-        const fetchItineraries = async () => {
+        if(user){
+          const fetchItineraries = async () => {
             try {
               const response = await fetch("/api/ai/savedIter");
               const data = await response.json();
@@ -18,7 +19,8 @@ export default function savedItinerary() {
             }
           };
           fetchItineraries();
-    },[]);
+        }
+    },[user]);
     return (
         <div className=" min-h-screen p-6 bg-black text-white rounded-lg font-mono">
           <h1 className="text-2xl text-center font-bold mb-4">Saved Itineraries</h1>

@@ -11,12 +11,15 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cookie": "^1.0.2",
+    "file-saver": "^2.0.5",
+    "html-to-pdfmake": "^2.5.23",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.12.1",
     "next": "15.2.1",
     "next-auth": "^4.24.11",
     "nodemailer": "^6.10.0",
     "openai": "^4.87.3",
+    "pdfmake": "^0.2.18",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

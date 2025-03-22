@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const iterSchema=new mongoose.Schema(
     {
+      
         destination:String,
         days:Number,
         interests:String,

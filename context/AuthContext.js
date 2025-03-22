@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
                 const data = await res.json();
                 if (res.ok) {
                     setUser(data.user);
-                    fetchUserItineraries(data.user._id); // Fetch user's itineraries
+             // Fetch user's itineraries
                 }
             } catch (error) {
                 console.log("Auth failed: ", error);
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         fetchUser();
     }, []);
 
-    // Fetch user's itineraries from the backend
+   // Fetch user's itineraries from the backend
     const fetchUserItineraries = async (userId) => {
         try {
             const res = await fetch("/api/ai/savedIter");
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
     
             if (res.ok && data.user) {
                 setUser(data.user);
-                fetchUserItineraries(data.user._id); // Fetch itineraries
+                //fetchUserItineraries(data.user._id); // Fetch itineraries
                 window.location.href = "/";
             } else {
                 alert(data.error || "Login failed");
@@ -66,12 +66,12 @@ export const AuthProvider = ({ children }) => {
             method: "POST",
         });
         setUser(null);
-        setItineraries([]); // Clear itineraries on logout
+        //setItineraries([]); // Clear itineraries on logout
         window.location.href = "/login";
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, itineraries }}>
+        <AuthContext.Provider value={{ user, login, logout,itineraries }}>
             {children}
         </AuthContext.Provider>
     );

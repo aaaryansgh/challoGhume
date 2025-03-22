@@ -1,6 +1,7 @@
 "use client"; // If using App Router
 
-import { useState } from "react";
+
+import {  useState } from "react";
 
 export default function ItineraryPlanner() {
   const [destination, setDestination] = useState("");
@@ -23,6 +24,15 @@ export default function ItineraryPlanner() {
     setItinerary(data.itinerary);
     setLoading(false);
   };
+  const downloadItinerary=()=>{
+    const element = document.createElement("a");
+    const file = new Blob([itinerary], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = `${destination}.txt`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-black py-30">
@@ -59,10 +69,24 @@ export default function ItineraryPlanner() {
 
       {itinerary && (
         <div className="mt-4 p-4 border">
-          <h2 className="text-xl font-semibold">Your Itinerary</h2>
-          <p>{itinerary}</p>
+          <h2 className="text-2xl font-bold text-blue-600 mb-4">Your Travel Itinerary</h2>
+          <p className="text-lg text-gray-800 mb-2">
+            <strong>Destination:</strong> {destination}
+          </p>
+          <p className="text-lg text-gray-800 mb-2">
+            <strong>Days:</strong> {days}
+          </p>
+          <p className="text-lg text-gray-800 mb-2">
+            <strong>Interests:</strong> {interests}
+          </p>
+          <p className="text-lg text-gray-600 mb-2">
+            <strong>Itinerary:</strong> {itinerary}
+          </p>
+          <button className="mt-4 bg-blue-500 border rounded p-2" onClick={downloadItinerary}>Download</button>
         </div>
+        
       )}
+      
       </form>
       
     </div>
